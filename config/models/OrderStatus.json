@@ -1,0 +1,61 @@
+{
+    "name": "OrderStatus",
+    "id": 9507079,
+    "title": "Order Status",
+    "hidden": false,
+    "sealed": false,
+    "abstract": false,
+    "version": "1.1",
+    "caching":"always",
+    "fields": [{
+        "name": "id",
+        "title": "Id",
+        "type": "Integer",
+        "nullable": false,
+        "primary": true
+    }, {
+        "name": "name",
+        "title": "Name",
+        "description": "The name of the item.",
+        "type": "Text",
+        "nullable":false
+    },{
+        "name": "alternateName",
+        "title": "Alternate Name",
+        "description": "An alias for the item.",
+        "type": "Text",
+        "nullable":false
+    }, {
+        "name": "description",
+        "title": "Description",
+        "description": "A short description of the item.",
+        "type": "Text"
+    }, {
+        "name": "color",
+        "title": "Color",
+        "description": "A color associated with this item.",
+        "type": "Text"
+    }],
+    "privileges":[
+        { "mask":1, "type":"global", "account":"*" },
+        { "mask":15, "type":"global" }
+    ],
+    "seed":[ {
+            "id":1, "name":"Delivered", "color":"#00796B", "alternateName":"OrderDelivered", "description":"Representing the successful delivery of an order."
+        }, {
+            "id":2, "name":"Cancelled", "color":"#FF5722", "alternateName":"OrderCancelled", "description":"Representing the cancellation of an order."
+        }, {
+            "id":3, "name":"In Transit", "color":"#8BC34A", "alternateName":"OrderInTransit", "description":"Representing that an order is in transit."
+        }, {
+            "id":4, "name":"Payment Due", "color":"#FF5252", "alternateName":"OrderPaymentDue", "description":"Representing that payment is due on an order."
+        }, {
+            "id":5, "name":"Pickup", "color":"#4CAF50", "alternateName":"OrderPickup", "description":"Representing availability of an order for pickup."
+        }, {
+            "id":6, "name":"Processing", "color":"#448AFF", "alternateName":"OrderProcessing", "description":"Representing that an order is being processed."
+        }, {
+            "id":7, "name":"Problem", "color":"#E64A19", "alternateName":"OrderProblem", "description":"Representing that there is a problem with the order."
+        }, {
+            "id":8, "name":"Returned", "color":"#607D8B", "alternateName":"OrderReturned", "description":"Representing that an order has been returned."
+        }
+    ]
+}

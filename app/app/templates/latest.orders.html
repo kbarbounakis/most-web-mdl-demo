@@ -1,0 +1,38 @@
+
+    <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+        <most-data model="Order" order="dateCreated desc" top="5" expand="customer" target="items" (items)="data($event)"></most-data>
+        <div class="mdl-card__title mdl-color--teal-400">
+            <h2 class="mdl-card__title-text">Latest Orders</h2>
+        </div>
+        <div class="mdl-card__supporting-text">
+            <ul class="demo-list-three mdl-list">
+                <li *ngFor="#order of items" class="mdl-list__item mdl-list__item--three-line">
+                <span class="mdl-list__item-primary-content">
+                  <i class="material-icons mdl-list__item-icon">shopping_cart</i>
+                  <span><a [routerLink]="['Order', {id: order.id}]">{{order.customer.description}}</a> </span>
+                  <span class="mdl-list__item-text-body">
+                  {{order.orderedItem.name}},  &euro;<b>{{order.orderedItem.price}}</b>
+                      <br/>
+                      {{order.orderDate | date : 'mediumDate'}}
+                  </span>
+                </span>
+                <span class="mdl-list__item-secondary-content">
+                  <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">star</i></a>
+                </span>
+                </li>
+            </ul>
+            <div>
+                (<span>{{total}} orders</span>)
+            </div>
+        </div>
+        <div class="mdl-card__actions mdl-card--border">
+            <a (click)="next(5)" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                View More
+            </a>
+        </div>
+        <div class="mdl-card__menu">
+            <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                <i class="material-icons">share</i>
+            </button>
+        </div>
+    </div>

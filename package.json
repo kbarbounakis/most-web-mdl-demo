@@ -1,0 +1,16 @@
+{
+  "name": "sample-web-app",
+  "version": "0.1.0",
+  "description": "Sample Web Application",
+  "main": "server.js",
+  "repository": "",
+  "author": "",
+    "scripts": {
+    },
+  "dependencies": {
+    "most-data": "*",
+    "most-data-sqlite": "*",
+    "most-web": "*",
+    "most-web-md": "*"
+  }
+}
