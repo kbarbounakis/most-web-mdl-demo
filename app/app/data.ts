@@ -8,16 +8,16 @@ import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
 @Component({
     selector: 'most-data',
     template:``,
-    inputs:["model","filter","order","group","expand","select","target","top","skip"],
+    inputs:["model","filter","order","group","expand","select","top","skip", "inlinecount"],
     outputs:["items"]
 })
 export class MostDataComponent {
     public items:EventEmitter = new EventEmitter();
     public model:string;
-    public target:string;
     public filter:string;
     public top:number;
     public skip:number;
+    public inlinecount:boolean;
     public order:string;
     public group:string;
     public select:string;
@@ -34,22 +34,49 @@ export class MostDataComponent {
             .setParam("expand",this.expand)
             .setParam("group",this.group)
             .setParam("top",this.top)
+            .setParam("inlinecount",this.inlinecount)
             .setParam("skip",this.skip);
-        q.list().subscribe(
-            data => {
-                var res = { };
-                this.target = this.target || "items";
-                res[this.target] = data.records;
-                this.items.emit(res);
-            },
-            err => {
-                console.log(err);
+
+        if (this.top == 1) {
+            return q.first().subscribe(
+                data => {
+                    this.items.emit(data);
+                },
+                err => {
+                    console.log(err);
+                }
+            );
+        }
+        else {
+            if (this.inlinecount) {
+                q.list().subscribe(
+                    data => {
+                        this.items.emit(data);
+                    },
+                    err => {
+                        console.log(err);
+                    }
+                );
             }
-        );
+            else {
+                q.items().subscribe(
+                    data => {
+                        this.items.emit(data);
+                    },
+                    err => {
+                        console.log(err);
+                    }
+                );
+            }
+        }
+
+
     }
     constructor(private context: ClientDataContext) { }
 }
 
-export interface MostDataComponentHandler {
-    data(any);
+export class MostDataComponentHandler {
+    data(target:string,value:any) {
+        this[target] = value;
+    }
 }

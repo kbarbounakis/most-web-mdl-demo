@@ -12,19 +12,8 @@ import {MostDataComponent,MostDataComponentHandler} from "./data";
     templateUrl: "/app/templates/latest.orders.html",
     directives:[ROUTER_DIRECTIVES, MostDataComponent]
 })
-export class LatestOrdersComponent implements MostDataComponentHandler {
-
+export class LatestOrdersComponent extends MostDataComponentHandler {
     public items:Array;
-
-    data(arg:any) {
-        if (arg) {
-            for(var key in arg) {
-                if (arg.hasOwnProperty(key)) {
-                    this[key] = arg[key];
-                }
-            }
-        }
-    }
 }
 
 @Component({
