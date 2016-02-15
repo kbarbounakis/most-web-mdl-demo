@@ -1,36 +1,41 @@
+
 /**
  * Created by kbarbounakis on 2/10/16.
  */
 import {Component, Input} from 'angular2/core';
-import {ClientDataContext} from "angular2-most/client";
+import {ClientDataContext, DataComponent, DataComponentWatcher} from "angular2-most/angular2-most";
 import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
-import {MostDataComponent,MostDataComponentHandler} from "./data";
 
 @Component({
     selector: 'latest-orders',
     styles: [],
     templateUrl: "/app/templates/latest.orders.html",
-    directives:[ROUTER_DIRECTIVES, MostDataComponent]
+    directives:[ROUTER_DIRECTIVES, DataComponent]
 })
-export class LatestOrdersComponent extends MostDataComponentHandler {
-    public items:Array;
+export class LatestOrdersComponent extends DataComponentWatcher {
+    public items:Array<any>;
 }
 
 @Component({
     selector: 'orders-home',
     styles: [],
     templateUrl: "/app/templates/orders.home.html",
-    directives: [LatestOrdersComponent, MostDataComponent]
+    directives: [LatestOrdersComponent, DataComponent]
 })
 export class OrdersHome {
-
-    ngOnInit() {
-        //
-    }
 
     constructor(private context: ClientDataContext) { }
 }
 
 export class OrderComponent {
+
+}
+
+@Component({
+    selector: 'products',
+    styles: [],
+    templateUrl: "/app/templates/products.home.html"
+})
+export class ProductsHomeComponent {
 
 }

@@ -39,35 +39,54 @@
 
     <!-- 1. Load libraries -->
     <!-- IE required polyfills (from CDN), in this exact order -->
-    <script src="/node_modules/es6-shim/es6-shim.min.js"></script>
-    <script src="/node_modules/angular2/bundles/angular2-polyfills.js"></script>
-    <script src="/node_modules/systemjs/dist/system.src.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.33.3/es6-shim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/0.19.16/system-polyfills.js"></script>
+    <script src="https://code.angularjs.org/tools/system.js"></script>
     <script src="https://code.angularjs.org/tools/typescript.js"></script>
-    <script src="/node_modules/rxjs/bundles/Rx.js"></script>
-    <script src="/node_modules/angular2/bundles/angular2.dev.js"></script>
-    <script src="/node_modules/angular2/bundles/http.dev.js"></script>
-    <script src="/node_modules/angular2/bundles/router.dev.js"></script>
-    <!-- Material Design Lite-->
-    <script src="https://code.getmdl.io/1.1.1/material.min.js"></script>
-      <script>
+    <script src="https://code.angularjs.org/2.0.0-beta.3/angular2-polyfills.js"></script>
+      <script src="https://code.angularjs.org/2.0.0-beta.3/Rx.min.js"></script>
+    <script src="/node_modules/angular2/bundles/angular2.js"></script>
+    <script src="/node_modules/angular2/bundles/http.js"></script>
+      <script src="/node_modules/angular2/bundles/router.dev.js"></script>
+      <!-- Material Design Lite-->
+      <script src="https://code.getmdl.io/1.1.1/material.min.js"></script>
+
+    <% if (process.env.NODE_ENV !== "development") { %>
+          <script src="/node_modules/angular2-most/dist/core.js"></script>
+          <script src="/node_modules/angular2-most/dist/client.js"></script>
+    <% } %>
+
+    <!-- 2. Configure SystemJS -->
+    <script>
+
+        <% if (process.env.NODE_ENV !== "development") { %>
+
         System.config({
-          transpiler: 'typescript',
-          typescriptOptions: {
-            emitDecoratorMetadata: true,
-              experimentalDecorators: true,
-            sourceMap:true
-          },
-          packages: {
-            'app': {defaultExtension: 'ts'},
-            'angular2-most': {defaultExtension: 'ts'}
-          },
-          map: {
-            "angular2-most": "node_modules/angular2-most"
-          }
+            transpiler: 'typescript',
+            typescriptOptions: { emitDecoratorMetadata: true },
+            packages: {
+                'app': {defaultExtension: 'ts'}
+            }
         });
-        System.import('app/app')
-                .then(null, console.error.bind(console));
-      </script>
+
+        <% } else { %>
+              System.config({
+                    transpiler: 'typescript',
+                    typescriptOptions: { emitDecoratorMetadata: true },
+                    packages: {
+                        'app': {defaultExtension: 'ts'},
+                        'angular2-most': {defaultExtension: 'ts'}
+                    },
+                  map: {
+                      "angular2-most": "node_modules/angular2-most"
+                  }
+              });
+        <% } %>
+
+      System.import('app/main')
+              .then(null, console.error.bind(console));
+    </script>
+
   </head>
   <body>
     <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">

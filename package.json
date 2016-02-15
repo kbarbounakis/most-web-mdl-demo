@@ -5,12 +5,12 @@
   "main": "server.js",
   "repository": "",
   "author": "",
-    "scripts": {
-    },
+  "scripts": {},
   "dependencies": {
     "most-data": "*",
     "most-data-sqlite": "*",
     "most-web": "*",
-    "most-web-md": "*"
+    "most-web-md": "*",
+    "systemjs": "^0.19.20"
   }
 }
